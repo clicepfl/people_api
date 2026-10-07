@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-rocket = { version = "0.5.1", features = ["secrets", "json"] }
+rocket = { version = "0.5.1", features = ["json"] }
 ldap3 = "0.12"
 serde = "1"
 tokio = "1"
