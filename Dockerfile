@@ -7,7 +7,7 @@ FROM rust:1-alpine3.23 AS build
 ARG pkg=people_api
 
 WORKDIR /build
-RUN apk add openssl alpine-sdk openssl-dev
+RUN apk add openssl alpine-sdk openssl-dev pkgconfig
 
 COPY Cargo.toml Cargo.lock ./
 RUN mkdir src && echo "fn main() {}" > src/main.rs
@@ -27,7 +27,6 @@ FROM runner
 WORKDIR /app
 
 COPY --from=build /build/main ./main
-
 COPY --from=build /build/Rocket.toml .
 
 ENV ROCKET_ADDRESS=0.0.0.0
