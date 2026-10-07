@@ -145,13 +145,16 @@ impl Into<UnifiedEPFLPerson> for Person {
             email: self.mail.clone(),
 
             section: Some(short_ou[0].to_string()),
-            semester: short_ou.last().map_or_default(|sem| {
-                if *sem == short_ou[0] {
-                    None
-                } else {
-                    Some((*sem).to_string())
-                }
-            }),
+            semester: short_ou.last().map_or_else(
+                || None,
+                |sem| {
+                    if *sem == short_ou[0] {
+                        None
+                    } else {
+                        Some((*sem).to_string())
+                    }
+                },
+            ),
             person_type: Some(self.employee_type.clone()),
         }
     }
